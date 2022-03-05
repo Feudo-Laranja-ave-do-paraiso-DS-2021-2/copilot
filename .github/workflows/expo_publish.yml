@@ -22,4 +22,4 @@ jobs:
           npm install
           npm install -g react-native-cli
           npm install -g expo expo-cli --loglevel=error
-          expo publish --release-channel homolog
+          expo publish  --non-interactive --release-channel homolog
