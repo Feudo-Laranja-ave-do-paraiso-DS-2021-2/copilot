@@ -9,4 +9,4 @@
 ### Para executar localmente:
 * Instale as dependências do projeto usando a chamada `make install`
 * Prepare seu ambiente usando a chamada `make prepare-local`
-* Dentro do diretório `/projeto-kokama/` inicie a aplicação com `expo start -c`
+* Dentro do diretório `/copilot/` inicie a aplicação com `expo start -c`
