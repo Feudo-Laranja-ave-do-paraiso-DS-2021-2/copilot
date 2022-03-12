@@ -1,15 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, SafeAreaView, Platform, FlatList, Touchable, Image } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import MapView, { Marker } from "react-native-maps"
-import {categories} from "./categories";
 
 export default function Home () {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.headerContainer}> 
-                <Text style={styles.title}>Bem-vindo!</Text>
-                <Text style={styles.subTitle}>"Olá eu sou a Home"</Text>
+                
             </View>
 
             <MapView style={styles.map}>
@@ -20,28 +17,6 @@ export default function Home () {
                     }}
                 />
             </MapView>
-
-            <View style={styles.categoryContainer}>
-
-                <FlatList
-                    data={categories}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={{
-                        alignItems: "center"
-                    }}
-                    renderItem={({item})=>(
-                        <TouchableOpacity
-                            key={item.key}
-                        >
-                            <Image source={item.image}/>
-                            <Text>{item.label}</Text>
-
-                        </TouchableOpacity>
-                    )}
-                />
-            </View>
-
         </SafeAreaView>
     );
 }
@@ -53,7 +28,7 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         padding: 15,
-        paddingTop: Platform.OS == "android" ? 0 : 0,
+        paddingTop: Platform.OS == "android" ? 10 : 0,
     },
     title: {
         fontSize: 24,
