@@ -16,9 +16,9 @@
  import Group from '../Screens/Group';
  import Profile from '../Screens/Profile';
  import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../../types';
- import LinkingConfiguration from './LinkingConfigurations'
+ import LinkingConfiguration from './LinkingConfigurations';
  
- export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }): JSX.Element {
    return (
      <NavigationContainer
        linking={LinkingConfiguration}
@@ -62,7 +62,7 @@
          component={Group}
          options={{
            title: 'Grupos',
-           tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
+           tabBarIcon: ({ color }) => <TabBarIcon name="users" color={"rgb(214, 96, 26)"} />,
          }}
        />    
        <BottomTab.Screen
@@ -70,7 +70,7 @@
          component={Home}
          options={({ navigation }: RootTabScreenProps<'Home'>) => ({
            title: 'Mapa',
-           tabBarIcon: ({ color }) => <TabBarIcon name="map-marker" color={color} />,           
+           tabBarIcon: ({ color }) => <TabBarIcon name="map-marker" color={"rgb(214, 96, 26)"} />,           
          })}
        />
        <BottomTab.Screen
@@ -78,7 +78,7 @@
          component={Profile}
          options={{
            title: 'Perfil',
-           tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
+           tabBarIcon: ({ color }) => <TabBarIcon name="user" color={"rgb(214, 96, 26)"} />,
          }}
        />
      </BottomTab.Navigator>

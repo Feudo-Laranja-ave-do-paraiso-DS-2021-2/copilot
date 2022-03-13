@@ -3,6 +3,7 @@ import Profile from './Screens/Profile';
 import Group from './Screens/Group';
 import { NavigationContainer} from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
+import { useReducer } from 'react';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,8 @@ export default function  () {
     </NavigationContainer>
   );
 }
+
+
 
 /*const TabStack = createBottomTabNavigator()
 

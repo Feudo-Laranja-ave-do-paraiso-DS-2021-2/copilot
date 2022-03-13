@@ -12,6 +12,6 @@ export default function Group () {
 const styles = StyleSheet.create({
     GroupContainer: {
         padding: 15,
-        paddingTop: Platform.OS == "android" ? 50 : 0,
+        paddingTop: Platform.OS == "android" ? 55 : 0,
     },    
 })

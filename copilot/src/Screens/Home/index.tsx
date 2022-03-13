@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         padding: 15,
-        paddingTop: Platform.OS == "android" ? 10 : 0,
+        paddingTop: Platform.OS == "android" ? 29 : 0,
     },
     title: {
         fontSize: 24,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     },
     subTitle: {
         fontSize: 14,
-        fontWeight: "400",
+        fontWeight: "bold",
         color: "rgb(0, 0, 0)",
     },
     map: {
