@@ -1,20 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { View, StyleSheet} from "react-native";
+import useCachedResources from './src/hooks/useCachedResources';
+import useColorScheme from './src/hooks/useColorScheme';
+import Navigation from './src/Navigation';
 
 export default function App() {
+  const isLoadingComplete = useCachedResources();
+  const colorScheme = useColorScheme();
+
   return (
-    <View style={styles.container}>
-      <Text>Fala galerinha do feudinho laranja!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <SafeAreaProvider>
+        <Navigation colorScheme={colorScheme} />
+        <StatusBar />
+        <View style={styles.Bar}></View>
+      </SafeAreaProvider>
   );
+  
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  Bar: {
+      paddingTop: 5,
+  },     
+})
