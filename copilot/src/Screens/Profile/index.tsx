@@ -5,11 +5,10 @@ import {MyButton} from '../../components/MyButton';
 import logo from '../../assets/logo.png'
 
 
-
 export default function Profile () {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');    
-    const [deviceId, setdeviceId] = useState('');    
+    const [name, setName] = useState('');    
+     
+  
 
     return (
         <View style={[styles.container, {justifyContent: 'center'}]}>
@@ -19,18 +18,29 @@ export default function Profile () {
             style={{width: 200, height: 200}}
             />
             <Text style={[styles.title]}>Copilot</Text>
-            <MyTextInput placeholder="Número de Celular" value={email} onChangeText={setEmail} />
-            <MyTextInput
-            placeholder="Senha"
-            secureTextEntry
-            value={password}
-            onChangeText={setPassword}
-            />
-
-            <MyButton title="Entrar" />                       
+            <MyTextInput placeholder="Nome" value={name} onChangeText={setName} />
+            <MyButton title="Entrar"/>                       
         </View>
     );
 }
+/*
+
+fetch('http://0.0.0.0:8006/profiles/', {
+  method: 'POST',
+  body: JSON.stringify({
+    "nome_completo": "Leandro Souza",
+    "id_dispositivo": "619999999999",
+    "latitude": "-67.555550",
+    "longitude": "-63.666600",
+}),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+  .then((response) => response.json())
+  .then((json) => console.log(json));
+
+*/
 
 const styles = StyleSheet.create({
     ProfileContainer: {

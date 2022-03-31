@@ -5,8 +5,8 @@ import MapView from "react-native-maps";
 import * as Location from "expo-location";
 
 const Home = () => {
-  const [location, setLocation] = useState(null);
-
+  const [latitude, setLatitude] = useState<number>(0);
+  const [longitude, setLongitude] = useState<number>(0);
   useEffect(() => {
     (async () => {
       let { status } =
@@ -16,18 +16,21 @@ const Home = () => {
         return;
       }
 
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })(10000);
+      const location = await Location.getCurrentPositionAsync(); 
+      const { latitude, longitude } = location.coords;
+      setLatitude(latitude);
+      setLongitude(longitude);
+    })();
   }, []);
+
 
   return (
     <View style={styles.container}>
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: 37.42597730214824,
-          longitude: -122.0856026405,
+          latitude: latitude,
+          longitude: longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
