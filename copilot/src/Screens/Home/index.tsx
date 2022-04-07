@@ -3,6 +3,7 @@ import { View, StyleSheet, Platform } from "react-native";
 import MapView from "react-native-maps";
 import * as Application from 'expo-application';
 import * as Location from "expo-location";
+import Search from '../../components/Search';
 const Home = () => {
 //const [latitude, setLatitude] = useState<number>(0);
 //const [longitude, setLongitude] = useState<number>(0);
@@ -40,6 +41,7 @@ return (
       mapType="terrain"
     />
     )}
+     <Search />
   </View>
 );
 };
