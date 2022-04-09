@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { Platform } from 'react-native'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { googleGeocodeAsync } from 'expo-location/build/LocationGoogleGeocoding';
 
-export default class Search extends Component {
+export default class Search extends Component  {
+
     render() {
         return <GooglePlacesAutocomplete 
-            placeholder='Para onde vamos?'
+            placeholder='Vamos pedalar?'
             onPress={(data, details)=> {
-                console.log(data, details)
+                this.props.locationStateCallback(details?.geometry.location)
+                //googleGeocodeAsync.details.latitude;
             }}
             query={{
-                key: 'AIzaSyDcaOHqSqAK7yHp3yDAXL1hXeMjF-itVG0',
+                key: 'AIzaSyCs16EPfb6vFTySbyWrN1Jijfn3c0RX4R0',
                 language:'pt'
             }}
             textInputProps={{
@@ -31,12 +34,13 @@ export default class Search extends Component {
                     height: 54,
                     marginHorizontal: 20,
                     borderTopWidth: 0,
-                    borderBottomWigth: 0
+                    borderBottomWigth: 0,
+
                 },
                 textInput: {
                     height: 54,
                     margin: 0,
-                    borderRadius: 0,
+                    borderRadius: 20,
                     paddingTop: 0,
                     paddingBottom: 0,
                     paddingLeft: 20,
