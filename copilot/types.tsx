@@ -25,9 +25,11 @@
  >;
  
  export type RootTabParamList = {
-   Group: undefined;
+   Group: undefined |  {usuario_id: string}
+   CreateGroup: undefined |  {usuario_id: string}
+   EnterGroup: undefined | {grupo_token: string, usuario_id: string, id_back: string}
    Home: undefined;
-   Profile: undefined
+   Profile: undefined;
  };
  
  export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<

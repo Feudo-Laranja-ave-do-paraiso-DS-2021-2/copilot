@@ -18,8 +18,8 @@ export default function App() {
   const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]);
   let cadastrado = false;
 
-  useEffect(async () => { 
-    axios.get('http://192.168.1.15:8006/profiles/?id_dispositivo={deviceId}')
+  /*useEffect(async () => { 
+    axios.get('https://c4a1-2804-14c-65a7-41e7-8900-3e36-3cfa-7cf9.ngrok.io/profiles/?id_dispositivo={deviceId}')
     .then(function (response) {
       // handle success
       cadastrado = true;
@@ -46,7 +46,7 @@ export default function App() {
     loadPosition();  
     async function putLocation() {
       axios
-        .put('http://192.168.1.15:8006/profiles/{id}/', {
+        .put('https://c4a1-2804-14c-65a7-41e7-8900-3e36-3cfa-7cf9.ngrok.io/profiles/{id}/', {
           latitude: initialPosition[0].toString(),
           longitude: initialPosition[1].toString(),          
         })
@@ -60,7 +60,7 @@ export default function App() {
         });
     }
     putLocation();
-  }
+  }*/
 
   return (
       <SafeAreaProvider>
