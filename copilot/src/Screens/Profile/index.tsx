@@ -6,6 +6,7 @@ import * as Location from "expo-location";
 import logo from '../../assets/logo.png'
 import { MyButton } from '../../components/MyButton';
 import { MyTextInput } from '../../components/MyTextInput';
+import { useNavigation } from '@react-navigation/native';
 
 export interface profileData {
   nome_completo: string,
@@ -21,7 +22,6 @@ export default function Profile () {
   const [lat, setLat] = useState<number>(0);
   const [long, setLong] = useState<number>(0);
   const deviceId =  Application.androidId ?? "";
-  console.log(deviceId);
   /*if(Platform.OS == "android"){
     const deviceId =  Application.androidId;
     console.log(deviceId);
@@ -35,7 +35,7 @@ export default function Profile () {
 
   let cadastrado = false;
   useEffect(async () => { 
-    axios.get('http://192.168.1.15:8006/profiles/?id_dispositivo={deviceId}')
+    axios.get(`https://c73b-2804-14c-65a7-41e7-4f7-c30c-c32f-4743.ngrok.io/profiles/?id_dispositivo=${deviceId}`)
     .then(function (response) {
       // handle success
       cadastrado = true;
@@ -84,7 +84,7 @@ export default function Profile () {
       let { status } =
       await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        console.log("Permission to access location was denied");
+        alert("Permission to access location was denied");
         return;
       }
       const loc_aux = await Location.getCurrentPositionAsync();
@@ -103,9 +103,8 @@ export default function Profile () {
         latitude: latUser.toString(),
         longitude: longUser.toString(),
       };
-      console.log(profile);
       axios 
-      .post('http://192.168.1.15:8006/profiles/', profile )
+      .post('https://c73b-2804-14c-65a7-41e7-4f7-c30c-c32f-4743.ngrok.io/profiles/', profile )
       .then(function (response) {
         // handle success
         alert(JSON.stringify(response.data));
