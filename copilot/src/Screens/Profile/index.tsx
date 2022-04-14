@@ -10,8 +10,8 @@ import { MyTextInput } from '../../components/MyTextInput';
 export interface profileData {
   nome_completo: string,
   id_dispositivo: string,
-  latitude: string,
-  longitude: string,
+  latitude: number,
+  longitude: number,
 };
 
 export default function Profile () {
@@ -21,21 +21,12 @@ export default function Profile () {
   const [lat, setLat] = useState<number>(0);
   const [long, setLong] = useState<number>(0);
   const deviceId =  Application.androidId ?? "";
-  console.log(deviceId);
-  /*if(Platform.OS == "android"){
-    const deviceId =  Application.androidId;
-    console.log(deviceId);
-  } else {
-    async () => {
-      const deviceId = await Application.getIosIdForVendorAsync();          
-      console.log(deviceId);
-    }   
-  }*/
-  
 
+  
   let cadastrado = false;
   useEffect(async () => { 
-    axios.get('http://192.168.1.15:8006/profiles/?id_dispositivo={deviceId}')
+
+    axios.get(`http://192.168.1.15:8006/profiles/?id_dispositivo=${deviceId}`)
     .then(function (response) {
       // handle success
       cadastrado = true;
@@ -62,7 +53,7 @@ export default function Profile () {
     loadPosition();  
     async function putLocation() {
       axios
-        .put('http://192.168.1.15:8006/profiles/{id}/', {
+        .put(`http://192.168.1.15:8006/profiles/{id}/`, {
           latitude: initialPosition[0].toString(),
           longitude: initialPosition[1].toString(),          
         })
@@ -105,7 +96,7 @@ export default function Profile () {
       };
       console.log(profile);
       axios 
-      .post('http://192.168.1.15:8006/profiles/', profile )
+      .post(`http://192.168.1.15:8006/profiles/`, profile )
       .then(function (response) {
         // handle success
         alert(JSON.stringify(response.data));

@@ -59,6 +59,7 @@ return (
       showsUserLocation
       loadingEnabled
       mapType='standard'
+      ref={el => (this.mapView = el)}
      >
       <MapViewDirections
         origin={[
@@ -69,6 +70,9 @@ return (
         apikey={"AIzaSyCs16EPfb6vFTySbyWrN1Jijfn3c0RX4R0"}
         strokeWidth={4}
         strokeColor="#ffa500"
+        onReady={result => { 
+          this.mapView.fitToCoordinates(result.coordinates)
+        }}
         />
       <Marker coordinate={location} />
     </MapView>
@@ -109,3 +113,5 @@ const styles = StyleSheet.create({
     },
 })
 export default Home;
+
+// http://192.168.1.15:8006

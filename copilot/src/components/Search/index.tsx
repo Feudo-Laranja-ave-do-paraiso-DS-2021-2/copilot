@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Platform } from 'react-native'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import { googleGeocodeAsync } from 'expo-location/build/LocationGoogleGeocoding';
 
 export default class Search extends Component  {
 
@@ -10,11 +9,10 @@ export default class Search extends Component  {
             placeholder='Vamos pedalar?'
             onPress={(data, details)=> {
                 this.props.locationStateCallback(details?.geometry.location)
-                //googleGeocodeAsync.details.latitude;
             }}
             query={{
                 key: 'AIzaSyCs16EPfb6vFTySbyWrN1Jijfn3c0RX4R0',
-                language:'pt'
+                language:'pt-br'
             }}
             textInputProps={{
                 autoCapitalize: 'none',
