@@ -9,6 +9,8 @@ import axios from "axios";
 import * as Application from "expo-application";
 import * as Location from "expo-location";
 
+export const IP = "https://1c19-2804-14c-65a7-41e7-1cf-22e4-a5e4-147d.ngrok.io"
+
 export default function App() {
 	const isLoadingComplete = useCachedResources();
 	const colorScheme = useColorScheme();
@@ -28,7 +30,7 @@ export default function App() {
 	useEffect(() => {
 		const GetData = async () => {
 			const response = await axios.get(
-				`http://192.168.1.15:8006/profiles/?id_dispositivo=${deviceId}`
+				`${IP}/profiles/?id_dispositivo=${deviceId}`
 			);
 			const id = response.data[0].id;
 			setId(id);
@@ -50,7 +52,7 @@ export default function App() {
 			const sendPatchRequest = async () => {
 				try {
 					const resp = await axios.patch(
-						`http://192.168.1.15:8006/profiles/${id}/`, {
+						`${IP}/profiles/${id}/`, {
                             latitude: initialPosition[0].toString(),
                             longitude: initialPosition[1].toString(),
                         }

@@ -6,12 +6,14 @@ import * as Location from "expo-location";
 import logo from '../../assets/logo.png'
 import { MyButton } from '../../components/MyButton';
 import { MyTextInput } from '../../components/MyTextInput';
+import { useNavigation } from '@react-navigation/native';
+import { IP } from '../../../App';
 
 export interface profileData {
   nome_completo: string,
   id_dispositivo: string,
-  latitude: number,
-  longitude: number,
+  latitude: string,
+  longitude: string,
 };
 
 export default function Profile () {
@@ -26,7 +28,7 @@ export default function Profile () {
   let cadastrado = false;
   useEffect(async () => { 
 
-    axios.get(`http://192.168.1.15:8006/profiles/?id_dispositivo=${deviceId}`)
+    axios.get(`${IP}/profiles/?id_dispositivo=${deviceId}`)
     .then(function (response) {
       // handle success
       cadastrado = true;
@@ -75,7 +77,7 @@ export default function Profile () {
       let { status } =
       await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        console.log("Permission to access location was denied");
+        alert("Permission to access location was denied");
         return;
       }
       const loc_aux = await Location.getCurrentPositionAsync();
@@ -94,9 +96,8 @@ export default function Profile () {
         latitude: latUser.toString(),
         longitude: longUser.toString(),
       };
-      console.log(profile);
       axios 
-      .post(`http://192.168.1.15:8006/profiles/`, profile )
+      .post(`${IP}/profiles/`, profile )
       .then(function (response) {
         // handle success
         alert(JSON.stringify(response.data));

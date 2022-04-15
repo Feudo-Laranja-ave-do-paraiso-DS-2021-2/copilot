@@ -13,7 +13,8 @@
  import Colors from '../constants/Colors';
  import useColorScheme from '../hooks/useCachedResources';
  import Home from '../Screens/Home';
- import Group from '../Screens/Group';
+ import Group from '../Screens/Group/Group';
+ import GroupNavigator from './GroupNavigator';
  import Profile from '../Screens/Profile';
  import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../../types';
  import LinkingConfiguration from './LinkingConfigurations';
@@ -59,7 +60,7 @@
        }}>
        <BottomTab.Screen
          name="Group"
-         component={Group}
+         component={GroupNavigator}
          options={{
            title: 'Grupos',
            tabBarIcon: ({ color }) => <TabBarIcon name="users" color={"rgb(214, 96, 26)"} />,
