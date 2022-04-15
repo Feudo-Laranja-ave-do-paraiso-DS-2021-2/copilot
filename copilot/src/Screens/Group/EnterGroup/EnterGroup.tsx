@@ -11,6 +11,7 @@ import { Icon } from 'react-native-elements'
 import axios from 'axios'
 import { RootTabParamList } from '../../../../types'
 import Participantes from '../../../components/Lista_Grupo'
+import { IP } from '../../../../App'
 
 
 
@@ -25,11 +26,11 @@ const EnterGroup: React.FC<EnterGroupProps> = ({ navigation, route }) => {
   const [groupname, setGroupname] = useState('')
   const [groupcode, setGroupcode] = useState('')
   useEffect(async () => { 
-    const responseProfile = await axios.get(`https://c73b-2804-14c-65a7-41e7-4f7-c30c-c32f-4743.ngrok.io/profiles/?id_dispositivo=${route.params?.usuario_id}`)
+    const responseProfile = await axios.get(`${IP}/profiles/?id_dispositivo=${route.params?.usuario_id}`)
     // handle success
     const id = responseProfile.data[0].id;
     setId(id);
-    const responseGroup =  await axios.get(`https://c73b-2804-14c-65a7-41e7-4f7-c30c-c32f-4743.ngrok.io/group/?token=${route.params?.grupo_token}`)
+    const responseGroup =  await axios.get(`${IP}/group/?token=${route.params?.grupo_token}`)
     
     // handle success
     const idgp = responseGroup.data[0].id;
@@ -38,7 +39,7 @@ const EnterGroup: React.FC<EnterGroupProps> = ({ navigation, route }) => {
     setGroupname(groupname);
     const groupcode = responseGroup.data[0].token;
     setGroupcode(groupcode);
-    const responsePostGroup = await axios.post(`https://c73b-2804-14c-65a7-41e7-4f7-c30c-c32f-4743.ngrok.io/group/${idgp}/adicionar_profile/`,{ids: [id] })
+    const responsePostGroup = await axios.post(`${IP}/group/${idgp}/adicionar_profile/`,{ids: [id] })
     // handle success      
   });      
   

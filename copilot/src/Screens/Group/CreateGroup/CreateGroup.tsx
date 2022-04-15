@@ -12,6 +12,7 @@ import { RootTabParamList } from '../../../../types'
 import { MyTextInput } from '../../../components/MyTextInput'
 import { MyButton } from "../../../components/MyButton";
 import * as Application from 'expo-application';
+import { IP } from '../../../../App'
 
 
 interface CreateGroupProps {
@@ -35,7 +36,7 @@ const postGroup = (groupName:string) => {
     nome_grupo: groupName,  
   };
     axios 
-    .post('https://c73b-2804-14c-65a7-41e7-4f7-c30c-c32f-4743.ngrok.io/group/', group )
+    .post(`${IP}/group`, group )
     .then(function (response) {
       // handle success
       Alert.alert("Código do Grupo", (response.data.token));
@@ -56,7 +57,7 @@ const CreateGroup: React.FC<CreateGroupProps> = ({ navigation }) => {
 
   let cadastrado = false;
   useEffect(async () => {
-  axios.get(`https://c73b-2804-14c-65a7-41e7-4f7-c30c-c32f-4743.ngrok.io/profiles/?id_dispositivo=${deviceId}`)
+  axios.get(`${IP}/profiles/?id_dispositivo=${deviceId}`)
   .then(function (response) {
     // handle success
     cadastrado = true;
