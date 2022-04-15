@@ -12,8 +12,8 @@ const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0])
 const [destination, setDestinati] = useState<[number, number]>([0, 0]);
 const [location, setLocation] = useState(
   {
-    latitude: -15.833391,
-    longitude: -48.05713,
+    latitude: initialPosition[0],
+    longitude: initialPosition[1],
   }
 );
 
@@ -67,12 +67,14 @@ return (
           initialPosition[1]
         ]}
         destination={location}
+        travelMode={"TRANSIT"}
         apikey={"AIzaSyCs16EPfb6vFTySbyWrN1Jijfn3c0RX4R0"}
         strokeWidth={4}
         strokeColor="#ffa500"
         onReady={result => { 
           this.mapView.fitToCoordinates(result.coordinates)
         }}
+        precision="high"
         />
       <Marker coordinate={location} />
     </MapView>
@@ -115,3 +117,12 @@ const styles = StyleSheet.create({
 export default Home;
 
 // http://192.168.1.15:8006
+
+/*
+
+  {
+    latitude: -15.833391,
+    longitude: -48.05713,
+  }
+
+  */

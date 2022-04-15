@@ -14,69 +14,68 @@ export default function App() {
 	const colorScheme = useColorScheme();
 	const deviceId = Application.androidId ?? "";
 	const [id, setId] = useState();
-	const [initialPosition, setInitialPosition] =
-	    useState<[number, number]>([0, 0]);
-  	let cadastrado = new Boolean(false);
+	const [cadastrado, setCadastrado] = useState(false);
+	const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0,]);
 
-	var options = {
-		accuracy:3,
-		distanceInterval:15,
-		mayShowUserSettingsDialog:true,
-		timeInterval: 5000,
-	};
-
-	useEffect(() => {
-		const GetData = async () => {
+  	useEffect(() => {
+    	const getData = async () => {
 			const response = await axios.get(
 				`http://192.168.1.15:8006/profiles/?id_dispositivo=${deviceId}`
 			);
 			const id = response.data[0].id;
 			setId(id);
-		};
+			const cadastrado = true;
+			setCadastrado(cadastrado);
+    	};
+    	getData().catch(console.error);
+  	}, []);
 
-		GetData().catch(console.error);
-	}, []);
-
-	if (cadastrado) {
-		console.log('Entrou no if');
+  	async function handlingData() {
 		async function loadPosition() {
-			const location = await Location.getCurrentPositionAsync(options);
-			const { latitude, longitude } = location.coords;
-			setInitialPosition([latitude, longitude]);
-      /////////
+		const location = await Location.getCurrentPositionAsync({accuracy:3});
+		const { latitude, longitude } = location.coords;
+		setInitialPosition([latitude, longitude]);
 		};
-      loadPosition();
+		await loadPosition();
+
 		async function putLocation() {
 			const sendPatchRequest = async () => {
 				try {
 					const resp = await axios.patch(
-						`http://192.168.1.15:8006/profiles/${id}/`, {
-                            latitude: initialPosition[0].toString(),
-                            longitude: initialPosition[1].toString(),
-                        }
+						`http://192.168.1.15:8006/profiles/${id}/`,
+						{
+							latitude: initialPosition[0].toString(),
+							longitude: initialPosition[1].toString(),
+						},
 					);
 					console.log(resp.data);
-				}catch(err){
-					// Handle Error Here
-					console.error(err);
-				};
+				} 	catch (err) {
+						console.error(err);
+					};
 			};
-			await sendPatchRequest();
-		};
-		putLocation();
-	};
+				await sendPatchRequest();
+		}
+    
+		await putLocation();
+  	};
 
-	return (
-		<SafeAreaProvider>
-			<Navigation colorScheme={colorScheme} />
-			<StatusBar />
-			<View style={styles.Bar}></View>
-		</SafeAreaProvider>
-	);
-};
+  	if (cadastrado) {
+		setTimeout(() => {
+			handlingData();
+		},8000);
+  	};
+
+  	return (
+    	<SafeAreaProvider>
+      		<Navigation colorScheme={colorScheme} />
+      		<StatusBar />
+      		<View style={styles.Bar}></View>
+    	</SafeAreaProvider>
+  	);
+}
 
 const styles = StyleSheet.create({
-	Bar: {
-		paddingTop: 5,
-	},
+  	Bar: {
+    	paddingTop: 5,
+  	},
 });
