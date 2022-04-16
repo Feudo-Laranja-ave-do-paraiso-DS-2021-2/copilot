@@ -9,7 +9,7 @@ import axios from "axios";
 import * as Application from "expo-application";
 import * as Location from "expo-location";
 
-export const IP = "http://192.168.1.15:8006";
+export const IP = "https://e6d2-2804-14c-65a7-41e7-4472-5a2c-ab48-ce3b.ngrok.io";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -47,7 +47,6 @@ export default function App() {
             latitude: initialPosition[0].toString(),
             longitude: initialPosition[1].toString(),
           });
-          console.log(resp.data);
         } catch (err) {
           console.error(err);
         }

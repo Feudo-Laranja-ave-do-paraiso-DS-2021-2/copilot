@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from "react";
+/*import React, {useEffect, useState, useRef} from "react";
 import { View, StyleSheet, Platform } from "react-native";
 import MapView, {Marker} from "react-native-maps";
 import * as Application from 'expo-application';
@@ -40,6 +40,8 @@ useEffect(() => {
     ]);    
   }
   loadPosition();    
+  console.log('id do grupo')
+  console.log(global.idGroup)  
 }, []);
 return (
   <View style={styles.container}>
@@ -115,9 +117,9 @@ const styles = StyleSheet.create({
     },
 })
 export default Home;
+*/
 
 
-/*
 
 import React, {useEffect, useState, useRef} from "react";
 import { View, StyleSheet, Platform } from "react-native";
@@ -136,10 +138,12 @@ export interface Coordinates{
 }
 //aqui
 const Home = () => {
+  //const [idgroup]
   const [profiles, setProfiles] = useState([])
   const [coordinates, setCoordinates]  = useState([])
   useEffect(async () => { 
-    const responseEnterGroup = await axios.get(`${IP}/group/1/`)
+    console.log(global.idGroup);
+    const responseEnterGroup = await axios.get(`${IP}/group/${global.idGroup}/`)
     const profiles = responseEnterGroup.data.profiles;
     setProfiles(profiles);
     let coord: Coordinates[] = [];
@@ -261,4 +265,3 @@ const styles = StyleSheet.create({
 
 export default Home;
 
-*/

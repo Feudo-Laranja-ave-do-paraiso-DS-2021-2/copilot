@@ -108,16 +108,18 @@ const EnterGroup: React.FC<EnterGroupProps> = ({ navigation, route }) => {
   const [id, setId] = useState('')
   const [groupname, setGroupname] = useState('')
   const [groupcode, setGroupcode] = useState('')
+  global.idGroup = '';
   useEffect(async () => { 
     const responseProfile = await axios.get(`${IP}/profiles/?id_dispositivo=${route.params?.usuario_id}`)
     // handle success
-    const id = responseProfile.data[0].id;
+    const id = await responseProfile.data[0].id;
     setId(id);
     const responseGroup =  await axios.get(`${IP}/group/?token=${route.params?.grupo_token}`)
     
     // handle success
-    const idgp = responseGroup.data[0].id;
+    const idgp = await responseGroup.data[0].id;
     setIdgp(idgp);
+    global.idGroup = await idgp;
     const groupname = responseGroup.data[0].nome_grupo;      
     setGroupname(groupname);
     const groupcode = responseGroup.data[0].token;
@@ -138,7 +140,6 @@ const EnterGroup: React.FC<EnterGroupProps> = ({ navigation, route }) => {
         <Text style={[styles.codigo_grupo]}>Código do Grupo: {route.params?.grupo_token}</Text>        
         <View style={[styles.linha]}></View>
         <Participantes iddogrupo = {idgp}/>
-        <MyButton style={styles.MyButton} onPress={() => navigation.navigate('Group')} title="Mapa do Grupo"/>    
     </View>
   )
 }
