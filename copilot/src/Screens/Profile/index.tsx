@@ -7,6 +7,7 @@ import logo from '../../assets/logo.png'
 import { MyButton } from '../../components/MyButton';
 import { MyTextInput } from '../../components/MyTextInput';
 import { useNavigation } from '@react-navigation/native';
+import {IP} from '../../../App';
 
 export interface profileData {
   nome_completo: string,
@@ -35,7 +36,7 @@ export default function Profile () {
 
   let cadastrado = false;
   useEffect(async () => { 
-    axios.get(`https://c73b-2804-14c-65a7-41e7-4f7-c30c-c32f-4743.ngrok.io/profiles/?id_dispositivo=${deviceId}`)
+    axios.get(`${IP}/profiles/?id_dispositivo=${deviceId}`)
     .then(function (response) {
       // handle success
       cadastrado = true;
@@ -104,7 +105,7 @@ export default function Profile () {
         longitude: longUser.toString(),
       };
       axios 
-      .post('https://c73b-2804-14c-65a7-41e7-4f7-c30c-c32f-4743.ngrok.io/profiles/', profile )
+      .post(`${IP}/profiles/`, profile )
       .then(function (response) {
         // handle success
         alert(JSON.stringify(response.data));
@@ -125,7 +126,7 @@ return (
       />
       <Text style={[styles.title]}>Copilot</Text>
       <MyTextInput placeholder="Nome" value={name} onChangeText={setName} />
-      <MyButton title="Entrar" onPress={() => postUser(name, deviceId, lat, long, cadastrado)}/>                      
+      <MyButton style={styles.MyButton} title="Entrar" onPress={() => postUser(name, deviceId, lat, long, cadastrado)}/>                      
   </View>
 );
 
@@ -156,6 +157,9 @@ const styles = StyleSheet.create({
       color: '#550AB1',
       fontWeight: 'bold',
   },
+  MyButton: {
+    borderRadius: 10
+}
 })
 
 

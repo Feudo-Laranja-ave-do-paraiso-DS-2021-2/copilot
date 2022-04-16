@@ -28,7 +28,7 @@
    Group: undefined |  {usuario_id: string}
    CreateGroup: undefined |  {usuario_id: string}
    EnterGroup: undefined | {grupo_token: string, usuario_id: string, id_back: string}
-   Home: undefined;
+   Home: undefined | {id_group: string};
    Profile: undefined;
  };
  

@@ -31,7 +31,7 @@ const Group: React.FC<GroupProps> = ({ navigation }) => {
             <View style={styles.InText}></View>
             <MyTextInput placeholder="Digite o código do grupo" value={codigogp} onChangeText={setCodigogp}/>
            
-            <MyButton onPress={() => navigation.navigate('EnterGroup', {grupo_token: codigogp})} title="Entrar"/>    
+            <MyButton style={styles.MyButton} onPress={() => navigation.navigate('EnterGroup', {grupo_token: codigogp})} title="Entrar"/>    
            
         </View>
     );
@@ -45,5 +45,8 @@ const styles = StyleSheet.create({
     },    
     InText:{
         paddingTop: 120,
+    },
+    MyButton: {
+        borderRadius: 10
     }
 })
