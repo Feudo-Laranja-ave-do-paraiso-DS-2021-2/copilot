@@ -15,6 +15,7 @@
  import Home from '../Screens/Home';
  import Group from '../Screens/Group/Group';
  import GroupNavigator from './GroupNavigator';
+ import GroupLocation from '../Screens/GroupLocation'
  import Profile from '../Screens/Profile';
  import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../../types';
  import LinkingConfiguration from './LinkingConfigurations';
@@ -73,6 +74,14 @@
            title: 'Mapa',
            tabBarIcon: ({ color }) => <TabBarIcon name="map-marker" color={"rgb(214, 96, 26)"} />,           
          })}
+       />
+       <BottomTab.Screen
+         name="GroupLocation"
+         component={GroupLocation}
+         options={{
+           title: 'Amigos',
+           tabBarIcon: ({ color }) => <TabBarIcon name="users" color={"rgb(214, 96, 26)"} />,
+         }}
        />
        <BottomTab.Screen
          name="Profile"
