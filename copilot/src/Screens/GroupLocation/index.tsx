@@ -4,10 +4,31 @@ import MapView, {Marker} from "react-native-maps";
 import * as Application from 'expo-application';
 import * as Location from "expo-location";
 import Search from '../../components/Search';
-
+import {IP} from '../../../App';
 import MapViewDirections from "react-native-maps-directions";
+import axios from "axios"
+export interface Coordinates{
+  coordinates: {
+    latitude: number,
+    longitude: number
+  }
+}
 
-const Home = () => {
+const GroupLocation = () => {
+  const [profiles, setProfiles] = useState([])
+  const [coordinates, setCoordinates]  = useState([])
+  useEffect(async () => { 
+    console.log(global.idGroup);
+    const responseEnterGroup = await axios.get(`${IP}/group/${global.idGroup}/`)
+    const profiles = responseEnterGroup.data.profiles;
+    setProfiles(profiles);
+    let coord: Coordinates[] = [];
+    profiles.forEach(p => {
+      coord.push({coordinates: {latitude: parseFloat(p.latitude), longitude: parseFloat(p.longitude)}})
+    }); 
+    console.log('coordenadas:')
+    setCoordinates(coord)
+});
 const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]);
 const [destination, setDestinati] = useState<[number, number]>([0, 0]);
 const [location, setLocation] = useState(
@@ -40,8 +61,6 @@ useEffect(() => {
     ]);    
   }
   loadPosition();    
-  console.log('id do grupo')
-  console.log(global.idGroup)  
 }, []);
 return (
   <View style={styles.container}>
@@ -78,7 +97,10 @@ return (
         }}
         precision="high"
         />
-      <Marker coordinate={location} />
+      <Marker coordinate={location} />      
+      {coordinates.map((item, index) => (
+          <Marker key={index} title="Test" coordinate={item.coordinates} pinColor='#ff4500'/>
+      ))}
     </MapView>
     )}
      <Search locationStateCallback={locationState}/>
@@ -116,10 +138,6 @@ const styles = StyleSheet.create({
       backgroundColor: "yellow",
     },
 })
-export default Home;
 
-
-
-
-
+export default GroupLocation;
 

@@ -10,31 +10,37 @@
  import { RootStackParamList } from '../../types';
  
  const linking: LinkingOptions<RootStackParamList> = {
-   prefixes: [Linking.makeUrl('/')],
-   config: {
-     screens: {
-       Root: {
-         screens: {
-           Group: {
-             screens: {
-               GroupScreen: 'Grupos',
-             },
-           },
-           Home: {
-             screens: {
-               HomeScreen: 'Mapa',
-             },
-           }, 
-           Profile: {
-            screens: {
-              ProfileScreen: 'Perfil',
+    prefixes: [Linking.makeUrl('/')],
+    config: {
+      screens: {
+        Root: {
+          screens: {
+            Group: {
+              screens: {
+                GroupScreen: 'Grupos',
+              },
             },
-          },          
-         },
-       },
-     },
-   },
- };
+            Home: {
+              screens: {
+                HomeScreen: 'Mapa',
+              },
+            }, 
+            GroupLocation: {
+              screens: {
+                GroupLocationScreen: 'GroupLocation',
+              },
+            },  
+            Profile: {
+              screens: {
+                ProfileScreen: 'Perfil',
+              },
+            },          
+          },
+        },          
+      },
+    },          
+  }
+   
  
  export default linking;
  

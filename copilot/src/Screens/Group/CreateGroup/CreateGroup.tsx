@@ -2,16 +2,13 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { StyleSheet, Platform, Alert } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import axios from 'axios' 
-import {
-  View,
-  TouchableOpacity,
-} from 'react-native'
+import {View,TouchableOpacity,Clipboard} from 'react-native'
 import { Icon } from 'react-native-elements'
-
 import { RootTabParamList } from '../../../../types'
 import { MyTextInput } from '../../../components/MyTextInput'
 import { MyButton } from "../../../components/MyButton";
 import * as Application from 'expo-application';
+import {IP} from '../../../../App';
 
 
 interface CreateGroupProps {
@@ -35,10 +32,20 @@ const postGroup = (groupName:string) => {
     nome_grupo: groupName,  
   };
     axios 
-    .post('https://c73b-2804-14c-65a7-41e7-4f7-c30c-c32f-4743.ngrok.io/group/', group )
+    .post(`${IP}/group/`, group )
     .then(function (response) {
       // handle success
-      Alert.alert("Código do Grupo", (response.data.token));
+      Alert.alert(
+        "Código do Grupo", 
+        (response.data.token),
+        [
+          {
+            text: "COPIAR",
+            onPress: () => Clipboard.setString((response.data.token).toString())
+          },
+          { text: "OK"}
+        ]
+      );
       //const idgrupo = response.data.id
       //setIdgrupo(idgrupo)
       
@@ -56,7 +63,7 @@ const CreateGroup: React.FC<CreateGroupProps> = ({ navigation }) => {
 
   let cadastrado = false;
   useEffect(async () => {
-  axios.get(`https://c73b-2804-14c-65a7-41e7-4f7-c30c-c32f-4743.ngrok.io/profiles/?id_dispositivo=${deviceId}`)
+  axios.get(`${IP}/profiles/?id_dispositivo=${deviceId}`)
   .then(function (response) {
     // handle success
     cadastrado = true;
@@ -81,7 +88,7 @@ const CreateGroup: React.FC<CreateGroupProps> = ({ navigation }) => {
               <Icon type="font-awesome" name="arrow-left" color="#000" />
         </TouchableOpacity>
         <MyTextInput placeholder="Nome do grupo" value={namegroup} onChangeText={setNamegroup}/>
-        <MyButton title="Criar" onPress={() => postGroup(namegroup)}/>
+        <MyButton style={styles.MyButton} title="Criar" onPress={() => postGroup(namegroup)}/>
         
     </View>
   )
@@ -91,8 +98,10 @@ export default CreateGroup
 
 const styles = StyleSheet.create({
   CreateGroupContainer: {
-      padding: 15,
+      padding: 20,
       paddingTop: Platform.OS == "android" ? 150 : 0,
   },   
-
+  MyButton: {
+    borderRadius: 10,
+}
 })
